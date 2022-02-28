@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../includes/headerFarm.jsp" />
+<jsp:include page="../includes/headerUser.jsp" />
 
 <style>
 .container{
@@ -32,7 +32,8 @@ h3{
       <p>판매자ID: <c:out value="${product.farmID}" /></p>
       <p>가격: <c:out value="${product.prodPrice}" />원</p>
       <p>남은수량: <c:out value="${product.prodInven}" />개</p>
-      <a class="btn btn-dark mt-auto" href="<%= request.getContextPath() %>/reviewController?cmd=find&prodID=<c:out value="${product.prodID}" />">리뷰보기</a>
+      <a class="btn btn-dark mt-auto" href="<%= request.getContextPath() %>/reviewController2?cmd=find&prodID=<c:out value="${product.prodID}" />">리뷰보기</a>
+      <a class="btn btn-dark mt-auto" href="<%= request.getContextPath() %>/CartController?prodID=<c:out value="${product.prodID}" />">장바구니</a>
     </div>  
   </div>
 
