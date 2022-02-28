@@ -35,4 +35,4 @@
   </div>
 </div>
 
-<jsp:include page="/includes/footerFarm.jsp" />
+<jsp:include page="/includes/footer.jsp" />
