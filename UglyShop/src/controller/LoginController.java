@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import beans.User;
 import dao.UserDAO;
 
-@WebServlet("/userController")
+@WebServlet("/userLogin")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,12 +37,12 @@ public class LoginController extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if (action == null) {
-			request.getRequestDispatcher("/main.jsp").forward(request, response);
+			request.getRequestDispatcher("main/main.jsp").forward(request, response);
 		} else if (action.equals("login")) {
 			request.setAttribute("userID", "");
 			request.setAttribute("userPassword", "");
 			request.setAttribute("message", "");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("login/loginUser.jsp").forward(request, response);
 		}
 		else {
 			out.println("없는 액션입니다.");
@@ -78,17 +78,17 @@ public class LoginController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("userID", userID);
 
-				request.getRequestDispatcher("main.jsp").forward(request, response);
+				request.getRequestDispatcher("main/main.jsp").forward(request, response);
 			} else if (result == 0) {
 				request.setAttribute("userID", userID); // 패스워드만 틀린 경우이기 때문에 userID는 보이도록 남겨줌
 				request.setAttribute("message", "0");
 				
-				request.getRequestDispatcher("login/login.jsp").forward(request, response);
+				request.getRequestDispatcher("login/loginUser.jsp").forward(request, response);
 			} else if (result == -1) {
 				request.setAttribute("userID", userID);
 				request.setAttribute("message", "-1");
 				
-				request.getRequestDispatcher("login/login.jsp").forward(request, response);
+				request.getRequestDispatcher("login/loginUser.jsp").forward(request, response);
 			}
 
 		}

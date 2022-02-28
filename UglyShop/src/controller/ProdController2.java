@@ -15,8 +15,8 @@ import javax.sql.DataSource;
 import beans.Product;
 import dao.ProductDao;
 
-@WebServlet("/ProdController")
-public class ProdController extends HttpServlet {
+@WebServlet("/ProdController2")
+public class ProdController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	private ProductDao prodDao;
@@ -28,17 +28,12 @@ public class ProdController extends HttpServlet {
 	public void init() throws ServletException {
 		prodDao = new ProductDao(dataSource);
 	}
-    public ProdController() {
+    public ProdController2() {
         super();
     }
 
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//		List<Product> prod = prodDao.findAll();
-//		prod.forEach(product -> System.out.println(product.toString()));	// 전체출력 테스트용
-//		System.out.println(prodDao.find(1));
-//		System.out.println(prodDao.prodCount());
 		
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("cmd");
@@ -51,9 +46,6 @@ public class ProdController extends HttpServlet {
 			switch (action) {
 			case "find":		// 상품 하나의 상세정보 출력
 				find(request, response);
-				break;
-			case "del":			// 삭제
-				delete(request, response);
 				break;
 			case "list":		// 전체 상품을 화면에 테이블로 표시
 				list(request, response);
@@ -75,7 +67,7 @@ public class ProdController extends HttpServlet {
 		
 		if(prod != null) {
 			request.setAttribute("product", prod);
-			RequestDispatcher rd = request.getRequestDispatcher("product/prodDetailFarm.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("product/prodDetailUser.jsp");
 			rd.forward(request, response);
 		}
 		
@@ -85,16 +77,9 @@ public class ProdController extends HttpServlet {
 		List<Product> products = prodDao.findAll();
 		
 		request.setAttribute("products", products);
-		RequestDispatcher rd = request.getRequestDispatcher("product/prodListFarm.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("product/prodListUser.jsp");
 		rd.forward(request, response);
 	}
-
-
-	private void delete(HttpServletRequest request, HttpServletResponse response) {
-		// 상품 삭제
-		
-	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

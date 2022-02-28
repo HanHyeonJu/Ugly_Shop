@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import beans.User;
 import dao.UserDAO;
 
-@WebServlet("/UpdateContoller")
+@WebServlet("/userUpdate")
 public class UpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import beans.User;
 import dao.UserDAO;
 
-@WebServlet("/JoinController")
+@WebServlet("/JoinUser")
 public class JoinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,7 @@ public class JoinController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("join/join.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("join/joinUser.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -54,25 +54,25 @@ public class JoinController extends HttpServlet {
 		if (exist == 1) {
 			request.setAttribute("message", "e1"); // 아이디 중복 메시지 출력
 
-			request.getRequestDispatcher("join/join.jsp").forward(request, response);
+			request.getRequestDispatcher("join/joinUser.jsp").forward(request, response);
 		} else {
 			String password = request.getParameter("userPassword");
 			String repassword = request.getParameter("userPassword2");
 
 			if (!password.equals(repassword)) {
 				request.setAttribute("message", "p");
-				request.getRequestDispatcher("join/join.jsp").forward(request, response);
+				request.getRequestDispatcher("join/joinUser.jsp").forward(request, response);
 			} else {
 				int result = userDao.join(user);
 
 				if (result == 1) {
 					System.out.println("회원가입 성공"); // 회원가입 성공
 
-					RequestDispatcher dispatcher = request.getRequestDispatcher("login/login.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("login/loginUser.jsp");
 					dispatcher.forward(request, response);
 				} else {
 					request.setAttribute("message", "r-1"); // 회원가입 실패
-					request.getRequestDispatcher("join/join.jsp").forward(request, response);
+					request.getRequestDispatcher("join/joinUser.jsp").forward(request, response);
 				}
 			}
 
