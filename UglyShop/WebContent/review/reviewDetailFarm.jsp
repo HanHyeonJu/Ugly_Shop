@@ -49,7 +49,6 @@
   <!-- review테이블에 farmID더한 후 세션에 저장된 farmID와 review.farmID가 똑같을때만 출력하도록 수정. -->
   <div class="replyEdit">
     <c:if test="${farmID eq review.farmID }">
-      <p>review.farmID와 세션의 farmID가 동일할때 출력되는 메세지입니다.</p>
       <!-- reply.replyID에 값이 있으면 덧글삭제버튼을 출력 -->
       <c:if test="${reply.replyID ne null }">
         <form name="replyDel" action="<%= request.getContextPath() %>/replyController" method="post">
@@ -77,7 +76,7 @@
   </div>
 </div>
 
-<jsp:include page="../includes/footerFarm.jsp" />
+<jsp:include page="../includes/footer.jsp" />
 <script>
   $('.nav-link').removeClass('active'); // 모든 메뉴의 액티브클래스를 삭제
   $('#m-reviewFar').addClass('active'); // 네브바에서 메뉴중 m-home에 active 클래스를 주는 스크립트

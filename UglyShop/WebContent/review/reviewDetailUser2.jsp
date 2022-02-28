@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../includes/headerFarm.jsp" />
+<jsp:include page="../includes/headerUser.jsp" />
 <style>
   .review {
     background-color: lightblue;
@@ -18,7 +18,7 @@
     margin-top: 20px;
   }
 </style>
-<h2>review detail 페이지 농민ver</h2>
+<h2>review detail 페이지 고객ver</h2>
 <br /><br />
 
 
@@ -38,7 +38,7 @@ if(prodID != null){
  		<p>상품번호: <c:out value="${review.prodID}" /></p>
  		<p>제목: <c:out value="${review.reviewTitle}" /></p>
 		<p><c:out value="${review.reviewContent}" /></p>
- 		<a href="<%=request.getContextPath()%>/reviewController?cmd=view&id=<c:out value='${review.reviewID}'/>" class="btn btn-success btn-action mt-3">덧글보기</a>
+ 		<a href="<%=request.getContextPath()%>/reviewController2?cmd=view&id=<c:out value='${review.reviewID}'/>" class="btn btn-success btn-action mt-3">덧글보기</a>
  	</div>
  	<br></br>	
  	</c:forEach>
