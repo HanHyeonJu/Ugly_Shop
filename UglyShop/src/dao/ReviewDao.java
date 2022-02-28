@@ -134,6 +134,30 @@ public class ReviewDao {
 			
 			return rowDeleted;
 	}
+	
+	public boolean update(Review review) {
+		boolean rowAffected = false;
+		 // userID,prodID는 업뎃을 할필요가?
+		try {
+			conn = datasource.getConnection();
+			pstmt = conn.prepareStatement("update review set userID =? , reviewDate = now() , reviewTitle =? , reviewContent =?, prodID =? where reviewID =?");
+			pstmt.setString(1, review.getUserID());
+			//pstmt.setDate(2, Date.valueOf(review.getReviewDate()));
+			pstmt.setString(2, review.getReviewTitle());
+			pstmt.setString(3, review.getReviewContent());
+			pstmt.setInt(4, review.getProdID());
+			pstmt.setInt(5, review.getReviewID());
+			
+			rowAffected = pstmt.executeUpdate() > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL에러 - update");
+		} finally {
+			closeAll();
+		}
+		return rowAffected;
+	}
     
 	public void closeAll() {
 		try {
@@ -145,4 +169,6 @@ public class ReviewDao {
 			System.out.println("DB연결 닫는 작업에서 에러발생");
 		}
 	}
+
+	
 }

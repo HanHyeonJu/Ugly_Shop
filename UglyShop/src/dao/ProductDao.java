@@ -13,13 +13,13 @@ import beans.Product;
 
 
 public class ProductDao {
-	private DataSource datasource;
+	private DataSource dataSource;
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
 	public ProductDao(DataSource datasource) {
-		this.datasource = datasource;
+		this.dataSource = datasource;
 	}
 	
 	// 모든 상품을 리스트로 리턴
@@ -27,7 +27,7 @@ public class ProductDao {
 		List<Product> list = new ArrayList<>();
 		
 		try {
-			conn = datasource.getConnection();
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement("select * from product");
 			rs = pstmt.executeQuery();
 			
@@ -56,7 +56,7 @@ public class ProductDao {
 		Product prod = null;
 		
 		try {
-			conn = datasource.getConnection();
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement("select * from product where prodID=?");
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -81,6 +81,41 @@ public class ProductDao {
 		return prod;
 	}
 	
+	// 모든 장바구니를 리스트로 리턴
+	public Product findById(int prodId) {
+			
+		Product prod = null;
+			
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement("select * from product where prodID=?");
+			pstmt.setInt(1, prodId);
+			rs = pstmt.executeQuery();
+			
+			
+		if(rs.next()) {
+				prod = new Product();
+				prod.setProdID(rs.getInt("prodID"));
+				prod.setFarmID(rs.getString("farmID"));
+				prod.setProdName(rs.getString("prodName"));
+				prod.setProdPrice(rs.getInt("prodPrice"));
+				prod.setProdInven(rs.getInt("prodInven"));
+				prod.setProdImg(rs.getString("prodImg"));
+				prod.setProdInfo(rs.getString("prodInfo"));
+				
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("SQL 에러");
+		} finally { //에러에 상관없이 무조건 실행
+				//DB연결 객체들을 닫는 과정이 필요하다.
+				closeAll();	
+		}
+			
+		return prod;
+		}
+		
 	public void closeAll() {
 		try {
 			if(rs != null) rs.close();
