@@ -1,25 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/765/765544.png" type="image/x-icon">
     <title>못난이 농산품(고객)</title>
   </head>
-<body>
-<header>
-	<% 
+  <body>
+    <header>
+		<% 
 		// 로그인 한 경우에 세션에 저장된 유저아이디를 가지고 옴
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String)session.getAttribute("userID");
 		}
+		if(userID == null){
+			out.println("<script>");
+			out.println("alert('권한이 없습니다.')");
+			out.println("location.href = '../login/loginUser.jsp'");
+			out.println("</script>");
+		}
+	
 	%>
 	
 	<nav class="navbar navbar-expand-lg navbar-dark"
 		style="background-color: gray">
-		<a class="navbar-brand" href="<%=request.getContextPath()%>/main/main.jsp">홈페이지</a>
+		<a class="navbar-brand" href="<%= request.getContextPath() %>/main/main.jsp">홈페이지</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -29,7 +36,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/ProdController2?cmd=list">농산품</a></li>
-				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/reviewController2?cmd=list">리뷰</a></li>
+				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/reviewController?cmd=list">리뷰</a></li>
 			</ul>
 			<form class="d-flex mb-2 mb-auto">
 				<input class="form-control" type="search" placeholder="Search"
@@ -64,4 +71,4 @@
 			%>
 		</div>
 	</nav>
-</header>
+    </header>
