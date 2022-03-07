@@ -18,7 +18,7 @@
 		if( userID != null){
 			out.println("<script>");
 			out.println("alert('이미 로그인이 되었습니다.')");
-			out.println("location.href = '../main.jsp'");
+			out.println("location.href = main/main.jsp");
 			out.println("</script>");
 		} 
 	

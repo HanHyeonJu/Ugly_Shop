@@ -18,7 +18,7 @@
 		if(userID == null){
 			out.println("<script>");
 			out.println("alert('권한이 없습니다.')");
-			out.println("location.href = '../login/loginUser.jsp'");
+			out.println("location.href = login/loginUser.jsp");
 			out.println("</script>");
 		}
 	
