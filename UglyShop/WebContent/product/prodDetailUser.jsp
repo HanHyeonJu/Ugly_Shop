@@ -33,7 +33,14 @@ h3{
       <p>가격: <c:out value="${product.prodPrice}" />원</p>
       <p>남은수량: <c:out value="${product.prodInven}" />개</p>
       <a class="btn btn-dark mt-auto" href="<%= request.getContextPath() %>/reviewController2?cmd=find&prodID=<c:out value="${product.prodID}" />">리뷰보기</a>
-      <a class="btn btn-dark mt-auto" href="<%= request.getContextPath() %>/CartController?prodID=<c:out value="${product.prodID}" />">장바구니</a>
+       <button
+    	onClick="location.href='/UglyShop/cart?id=<c:out value="${product.prodID}" />'"
+   		id="cart"
+    	type="button"
+    	class="btn btn-success"
+  		>
+    	장바구니
+  		</button>
     </div>  
   </div>
 
