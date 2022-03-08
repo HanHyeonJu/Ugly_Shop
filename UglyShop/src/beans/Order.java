@@ -18,34 +18,9 @@ public class Order {
 	private boolean farmCheck;
 	private int trackNum;
 	private String is_status;
-	
-	
-	
-	public Order(int orderID, int cartID, String userID, String userName, String userAdd, String userTel, int prodID,
-			int prodPrice, String prodName, int prodQuantity, int totalPrice, String farmID, String farmTel,
-			boolean farmCheck, int trackNum, String is_status) {
-		this.orderID = orderID;
-		this.cartID = cartID;
-		this.userID = userID;
-		this.userName = userName;
-		this.userAdd = userAdd;
-		this.userTel = userTel;
-		this.prodID = prodID;
-		this.prodPrice = prodPrice;
-		this.prodName = prodName;
-		this.prodQuantity = prodQuantity;
-		this.totalPrice = totalPrice;
-		this.farmID = farmID;
-		this.farmTel = farmTel;
-		this.farmCheck = farmCheck;
-		this.trackNum = trackNum;
-		this.is_status = is_status;
-	}
-
 	public int getOrderID() {
 		return orderID;
 	}
-	
 	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
@@ -103,6 +78,12 @@ public class Order {
 	public void setProdQuantity(int prodQuantity) {
 		this.prodQuantity = prodQuantity;
 	}
+	public int getOrderQuantity() {
+		return orderQuantity;
+	}
+	public void setOrderQuantity(int orderQuantity) {
+		this.orderQuantity = orderQuantity;
+	}
 	public int getTotalPrice() {
 		return totalPrice;
 	}
@@ -124,7 +105,7 @@ public class Order {
 	public boolean getFarmCheck() {
 		return farmCheck;
 	}
-	public void setFarmCheck(Boolean farmCheck) {
+	public void setFarmCheck(boolean farmCheck) {
 		this.farmCheck = farmCheck;
 	}
 	public int getTrackNum() {
@@ -144,18 +125,9 @@ public class Order {
 	public String toString() {
 		return "Order [orderID=" + orderID + ", cartID=" + cartID + ", userID=" + userID + ", userName=" + userName
 				+ ", userAdd=" + userAdd + ", userTel=" + userTel + ", prodID=" + prodID + ", prodPrice=" + prodPrice
-				+ ", prodName=" + prodName + ", prodQuantity=" + prodQuantity + ", totalPrice=" + totalPrice
-				+ ", farmID=" + farmID + ", farmTel=" + farmTel + ", farmCheck=" + farmCheck + ", trackNum=" + trackNum
-				+ ", is_status=" + is_status + "]";
+				+ ", prodName=" + prodName + ", prodQuantity=" + prodQuantity + ", orderQuantity=" + orderQuantity
+				+ ", totalPrice=" + totalPrice + ", farmID=" + farmID + ", farmTel=" + farmTel + ", farmCheck="
+				+ farmCheck + ", trackNum=" + trackNum + ", is_status=" + is_status + "]";
 	}
-
-	public int getOrderQuantity() {
-		return orderQuantity;
-	}
-
-	public void setOrderQuantity(int orderQuantity) {
-		this.orderQuantity = orderQuantity;
-	}
-	
 	
 }
