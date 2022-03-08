@@ -37,11 +37,11 @@ public class CartController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String id = req.getParameter("id");
-		int prodId = Integer.parseInt(id);
-		Product prod = productDao.findById(prodId); //String을 int로. 파라메터는 string으로만 받아서.
+		int prodID = Integer.parseInt(id);
+		Product prod = productDao.findById(prodID); //String을 int로. 파라메터는 string으로만 받아서.
 		HttpSession session = req.getSession();
-		String userId = (String)session.getAttribute("userId");
-		String farmId = req.getParameter("farmId");
+		String userID = (String)session.getAttribute("userID");
+		String farmID = req.getParameter("farmID");
 		
 		HashMap<Integer, Cart> cartList = null;
 		
@@ -49,19 +49,19 @@ public class CartController extends HttpServlet {
 			cartList = new HashMap<>();
 			
 			
-			cartList.put(prodId, new Cart(prodId, prod.getProdName(), prod.getProdPrice(), 1, userId, farmId)); // OrderQuantity 는 당연히 처음 상품을 넣는 거니까 1을 집어넣어줘야겠지 
+			cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), 1, userID, farmID)); // OrderQuantity 는 당연히 처음 상품을 넣는 거니까 1을 집어넣어줘야겠지 
 			session.setAttribute("cartList", cartList); // 세션에 장바구니 목록을 set한다.
 		} else { // 세션에 장바구니 목록이 이미 있을경우.
 			// 세션에 있던 장바구니 목록을 들고와서(cartId로..) cartList에 담는다.
 			cartList = (HashMap<Integer, Cart>) session.getAttribute("cartList");
 			
-			if (cartList.containsKey(prodId)) { // 장바구니 안에 이미 같은 상품이 있을 경우. ++수량 을 해주고 다시 세션에 집어넣음.
-				int qty = cartList.get(prodId).getOrderQuantity();
+			if (cartList.containsKey(prodID)) { // 장바구니 안에 이미 같은 상품이 있을 경우. ++수량 을 해주고 다시 세션에 집어넣음.
+				int qty = cartList.get(prodID).getOrderQuantity();
 			
-				cartList.put(prodId, new Cart(prodId, prod.getProdName(), prod.getProdPrice(), ++qty, userId, farmId));
+				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), ++qty, userID, farmID));
 				session.setAttribute("cartList", cartList);
 			} else { // 장바구니 안에 같은 상품이 없을 경우, 상품 수량은 1을 put해준다.
-				cartList.put(prodId, new Cart(prodId, prod.getProdName(), prod.getProdPrice(), 1, userId, farmId));
+				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), 1, userID, farmID));
 				session.setAttribute("cartList", cartList);
 				//cartList.values();
 			}
@@ -84,11 +84,11 @@ public class CartController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		String id = req.getParameter("id");
-		int prodId = Integer.parseInt(id);
-		Product prod = productDao.findById(prodId);
+		int prodID = Integer.parseInt(id);
+		Product prod = productDao.findById(prodID);
 		HttpSession session = req.getSession();
-		String userId = (String)session.getAttribute("userId");
-		String farmId = req.getParameter("farmId");
+		String userID = (String)session.getAttribute("userID");
+		String farmID = req.getParameter("farmID");
 
 		HashMap<Integer, Cart> cartList = (HashMap<Integer, Cart>) session.getAttribute("cartList");
 
@@ -106,23 +106,23 @@ public class CartController extends HttpServlet {
 		}
 		
 		
-		int qty = cartList.get(prodId).getOrderQuantity();
+		int qty = cartList.get(prodID).getOrderQuantity();
 
 		
 		// 수량 감소
 		if(qty == 1) {
-			System.out.println("prodId : "+prodId);
-			cartList.remove(prodId);
+			System.out.println("prodId : "+prodID);
+			cartList.remove(prodID);
 			
 			if(cartList.size() == 0) {
 				session.removeAttribute("cartList");
 			} else {
-				cartList.put(prodId, new Cart(prodId, prod.getProdName(), prod.getProdPrice(), --qty, userId, farmId));
+				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), --qty, userID, farmID));
 			}
 			
 			session.setAttribute("cartList", cartList);
 		} else {
-			cartList.put(prodId, new Cart(prodId, prod.getProdName(), prod.getProdPrice(), --qty, userId, farmId));
+			cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), --qty, userID, farmID));
 			session.setAttribute("cartList", cartList);
 		}
 		

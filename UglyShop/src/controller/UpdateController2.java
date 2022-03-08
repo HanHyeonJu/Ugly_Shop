@@ -16,7 +16,7 @@ import dao.FarmerDAO;
 
 
 
-@WebServlet("/farmerUpdate")
+@WebServlet("/UpdateFarm")
 public class UpdateController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
