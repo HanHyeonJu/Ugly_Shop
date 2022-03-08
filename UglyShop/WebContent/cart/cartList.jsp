@@ -4,7 +4,7 @@
 <%@page import="java.util.HashMap"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="beans.Cart"%>
- <jsp:include page="../includes/headerUser3.jsp" />
+ <jsp:include page="../includes/headerUser.jsp" />
 
  <% if (session.getAttribute("cartList") != null) { HashMap<Integer, Cart>
     cartList = (HashMap<Integer, Cart>) session.getAttribute("cartList"); } %>
@@ -30,10 +30,10 @@
                 <td><c:out value="${carList.prodName}" /></td>
                 <td>
                   <c:out value="${carList.orderQuantity}" />
-                <button type="button" class="down btn btn-secondary btn-sm" data-id="<c:out value='${carList.prodId}' />"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                <button type="button" class="down btn btn-secondary btn-sm" data-id="<c:out value='${carList.prodID}' />"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
                   </svg></button>
-                  <button type="button" class="up btn btn-secondary btn-sm" data-id="<c:out value='${carList.prodId}' />">
+                  <button type="button" class="up btn btn-secondary btn-sm" data-id="<c:out value='${carList.prodID}' />">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
                 </svg>
@@ -45,7 +45,7 @@
                     id="delete"
                     type="button"
                     class="btn btn-danger btn-sm btn-delete"
-                    data-id="<c:out value='${carList.prodId}' />"
+                    data-id="<c:out value='${carList.prodID}' />"
                   >
                     삭제
                   </button>
