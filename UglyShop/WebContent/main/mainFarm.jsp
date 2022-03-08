@@ -31,6 +31,10 @@
       정상적으로 판매되는 농산물과 다를바 없지만  다른 이유로 상품가치가 떨어지는, 예를들어 크기가 작거나 모양이 신기하게 자란
 	  못난이 농산물 들을 싸게 팔수있도록 농인들을 사이트에 입점시켜 고객들이 간편하게 온라인으로 구매할 수 있도록
 	  시장 경제를 살리는 쇼핑몰
+		 <p class="lead mt-3">
+				JSP, Servlet, JDBC, MySQL, DataTables, Modal <small
+					class="text-muted">(plugin jQuery)</small>.
+		</p>
     </p>
   </div>
 </div>
