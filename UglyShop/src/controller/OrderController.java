@@ -72,15 +72,15 @@ public class OrderController extends HttpServlet {
 
 	private void save(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Order order = new Order();
-		User user = orderDao.findByUserId(req.getParameter("userId"));
+		User user = orderDao.findByUserId(req.getParameter("userID"));
 		Farmer farmer = orderDao.findByFarmId(req.getParameter("farmID"));
 		
-		order.setOrderID(Integer.parseInt(req.getParameter("orderId")));
-		order.setCartID(Integer.parseInt(req.getParameter("cartId"))); 
-		order.setUserID(req.getParameter("userId")); 
+		order.setOrderID(Integer.parseInt(req.getParameter("orderID")));
+		order.setCartID(Integer.parseInt(req.getParameter("cartID"))); 
+		order.setUserID(req.getParameter("userID")); 
 		order.setUserAdd(user.getUserAdd());
 		order.setUserTel(user.getUserTel());
-		order.setProdID(Integer.parseInt(req.getParameter("prodId")));
+		order.setProdID(Integer.parseInt(req.getParameter("prodID")));
 		order.setProdName(req.getParameter("prodName"));
 		order.setProdPrice(Integer.parseInt(req.getParameter("prodPrice")));
 		order.setOrderQuantity(Integer.parseInt(req.getParameter("orderQuantity")));

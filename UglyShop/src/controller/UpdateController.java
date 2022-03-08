@@ -77,10 +77,18 @@ public class UpdateController extends HttpServlet {
 			user.setUserAdd(request.getParameter("userAdd"));
 			user.setUserTel(request.getParameter("userTel"));
 
-			boolean update = userDao.userupdate(user);
+			String password = request.getParameter("userPassword");
+			String repassword = request.getParameter("userPassword2");
 
-			if (update) {
-				request.getRequestDispatcher("update/updateSuccess.jsp").forward(request, response);
+			if (!password.equals(repassword)) {
+				request.setAttribute("message", "p");
+				request.getRequestDispatcher("update/userUpdate.jsp").forward(request, response);
+			} else {
+				boolean update = userDao.userupdate(user);
+
+				if (update) {
+					request.getRequestDispatcher("update/updateSuccess.jsp").forward(request, response);
+				}
 			}
 
 		}
