@@ -82,14 +82,14 @@ public class ProductDao {
 	}
 	
 	// 모든 장바구니를 리스트로 리턴
-	public Product findById(int prodId) {
+	public Product findById(int prodID) {
 			
 		Product prod = null;
 			
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement("select * from product where prodID=?");
-			pstmt.setInt(1, prodId);
+			pstmt.setInt(1, prodID);
 			rs = pstmt.executeQuery();
 			
 			
