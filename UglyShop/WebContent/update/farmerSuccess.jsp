@@ -12,19 +12,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	// 로그인 한 경우에 세션에 저장된 유저아이디를 가지고 옴
-	String farmID = null;
-	if (session.getAttribute("farmID") != null) {
-		farmID = (String) session.getAttribute("farmID");
-	}
-	if(farmID == null){
-		out.println("<script>");
-		out.println("alert('권한이 없습니다.')");
-		out.println("location.href = '../login/login.jsp'");
-		out.println("</script>");
-	}
+<header>
+		<% 
+		// 로그인 한 경우에 세션에 저장된 유저아이디를 가지고 옴
+		String farmID = null;
+		if(session.getAttribute("farmID") != null){
+			farmID = (String)session.getAttribute("farmID");
+		}
+		if(farmID == null){
+			out.println("<script>");
+			out.println("alert('권한이 없습니다.')");
+			out.println("location.href = ../login/loginFarm.jsp");
+			out.println("</script>");
+		}
+	
 	%>
+	
 
 	 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: gray">
       <a class="navbar-brand" href="<%=request.getContextPath()%>/main/mainFarm.jsp">홈페이지</a>
@@ -60,7 +63,7 @@
 					role="button" data-bs-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> 마이 페이지</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/login/logout.jsp">로그아웃</a></li>
+						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/logoutFarm">로그아웃</a></li>
 						<li><a class="dropdown-item" href="<%=request.getContextPath()%>/update/farmerPassword.jsp">농민정보수정</a></li>
 					</ul>
 				</li>
@@ -68,6 +71,8 @@
         <% } %>
       </div>
     </nav>
+    </header>
+
     
 	<%
 			// JDBC 참조 변수 준비
