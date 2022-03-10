@@ -28,7 +28,7 @@
 						<tr>
 							<td><c:out value="${carList.prodName}" /></td>
 							<td><c:out value="${carList.orderQuantity}" />
-								<button type="button" class="down btn btn-secondary btn-sm"
+								<button type="button" class="down btn btn-secondary btn-sm" 
 									data-id="<c:out value='${carList.prodID}' />">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-arrow-down-short"
@@ -37,7 +37,7 @@
 											d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z" />
 		                  </svg>
 								</button>
-								<button type="button" class="up btn btn-secondary btn-sm"
+								<button type="button" class="up btn btn-secondary btn-sm" 
 									data-id="<c:out value='${carList.prodID}' />">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-arrow-up-short"
@@ -65,14 +65,13 @@
 					class="btn btn-success float-right">주문하기</a>
 			</div>
 		</div>
-
-<jsp:include page="/includes/footer.jsp" />
-
+		
+<jsp:include page="../includes/footer.jsp" />
+<script src="<%=request.getContextPath()%>/assets/cartList.js"></script>
 <script>
 	$('.nav-link').removeClass('active');
 	$('#m-cart').addClass('active');
 </script>
 
-<script src="<%=request.getContextPath()%>/assets/cartList.js"></script>
 </body>
 </html>
