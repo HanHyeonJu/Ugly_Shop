@@ -40,10 +40,9 @@ if(prodID != null){
 		<p><c:out value="${review.reviewContent}" /></p>
  		<a href="<%=request.getContextPath()%>/reviewController?cmd=view&id=<c:out value='${review.reviewID}'/>" class="btn btn-success btn-action mt-3">덧글보기</a>
  	</div>
- 	<br></br>	
+ 	<br></br>
  	</c:forEach>
  	</div>
-
 <%} %>
 
 <!-- 복붙끝 -->
