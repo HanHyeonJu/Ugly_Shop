@@ -37,7 +37,6 @@ public class ProductDao {
 				prod.setFarmID(rs.getString("farmID"));
 				prod.setProdName(rs.getString("prodName"));
 				prod.setProdPrice(rs.getInt("prodPrice"));
-				prod.setProdInven(rs.getInt("prodInven"));
 				prod.setProdImg(rs.getString("prodImg"));
 				prod.setProdInfo(rs.getString("prodInfo"));
 				
@@ -67,7 +66,6 @@ public class ProductDao {
 				prod.setFarmID(rs.getString("farmID"));
 				prod.setProdName(rs.getString("prodName"));
 				prod.setProdPrice(rs.getInt("prodPrice"));
-				prod.setProdInven(rs.getInt("prodInven"));
 				prod.setProdImg(rs.getString("prodImg"));
 				prod.setProdInfo(rs.getString("prodInfo"));
 			}
@@ -81,7 +79,7 @@ public class ProductDao {
 		return prod;
 	}
 	
-	// 모든 장바구니를 리스트로 리턴
+	// 모든 장바구니에 담긴 상품들을 리스트로 리턴
 	public Product findById(int prodID) {
 			
 		Product prod = null;
@@ -99,7 +97,6 @@ public class ProductDao {
 				prod.setFarmID(rs.getString("farmID"));
 				prod.setProdName(rs.getString("prodName"));
 				prod.setProdPrice(rs.getInt("prodPrice"));
-				prod.setProdInven(rs.getInt("prodInven"));
 				prod.setProdImg(rs.getString("prodImg"));
 				prod.setProdInfo(rs.getString("prodInfo"));
 				
