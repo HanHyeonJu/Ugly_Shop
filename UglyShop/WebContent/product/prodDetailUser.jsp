@@ -30,7 +30,7 @@ h3 {
 
 <div class="col-md-8 mx-auto mt-5">
 	<div class="container">
-		<img src="<c:out value='${product.prodImg}' />" width="600" alt="상품사진" />
+		<img class="ProdImg" src="<%= request.getContextPath() %>/assets/img/<c:out value='${product.prodImg}' />.jpg" alt="상품사진">
 		<div class="container2">
 			<h3>
 				상품명:
@@ -51,11 +51,6 @@ h3 {
 				가격:
 				<c:out value="${product.prodPrice}" />
 				원
-			</p>
-			<p>
-				남은수량:
-				<c:out value="${product.prodInven}" />
-				개
 			</p>
 			<a class="btn btn-dark mt-auto"
 				href="<%= request.getContextPath() %>/reviewController2?cmd=find&prodID=<c:out value="${product.prodID}" />">리뷰보기</a>
