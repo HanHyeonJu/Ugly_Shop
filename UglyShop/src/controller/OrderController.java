@@ -20,6 +20,7 @@ import beans.Order;
 import beans.User;
 import dao.OrderDao;
 import dao.ProductDao;
+import beans.Card;
 import beans.Cart;
 import beans.Product;
 import utills.Json;
@@ -38,12 +39,12 @@ public class OrderController extends HttpServlet {
 	public void init() throws ServletException {
 		orderDao = new OrderDao(dataSource);
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("cmd");
-		
+
 		switch (action) {
 		case "save": // order테이블에 주문 저장하기
 			save(req, resp);
@@ -55,61 +56,66 @@ public class OrderController extends HttpServlet {
 			ordersList(req, resp);
 			break;
 		}
-		
-	
+
 	}
-	
-	
+
 	private void ordersList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Order> orders = orderDao.findAll(); // DB의 모든 주문내역 가져오기
-		
+
 		req.setAttribute("orders", orders);
-		
-		RequestDispatcher rd = req.getRequestDispatcher("orders/ordersList.jsp"); //!!!jsp이름 수정하기!!!
+
+		RequestDispatcher rd = req.getRequestDispatcher("orders/ordersList.jsp"); // !!!jsp이름 수정하기!!!
 		rd.forward(req, resp); // 리퀘스트를 유지하면서 ordersList.jsp페이지로 이동
-		
+
 	}
 
-	private void save(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Order order = new Order();
-		User user = orderDao.findByUserId(req.getParameter("userID"));
-		Farmer farmer = orderDao.findByFarmId(req.getParameter("farmID"));
+	private void save(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		
-		order.setOrderID(Integer.parseInt(req.getParameter("orderID")));
-		order.setCartID(Integer.parseInt(req.getParameter("cartID"))); 
-		order.setUserID(req.getParameter("userID")); 
-		order.setUserAdd(user.getUserAdd());
-		order.setUserTel(user.getUserTel());
-		order.setProdID(Integer.parseInt(req.getParameter("prodID")));
-		order.setProdName(req.getParameter("prodName"));
-		order.setProdPrice(Integer.parseInt(req.getParameter("prodPrice")));
-		order.setOrderQuantity(Integer.parseInt(req.getParameter("orderQuantity")));
+//		Card card = new Card();
+//		card.setCardNum(req.getParameter("cardNum"));
+//		card.setCardPass(req.getParameter("cardPass"));
+//
+//		if (req.getParameter("cardNum") == null || req.getParameter("cardPass") == null) {
+//			req.setAttribute("message", "164");
+//			req.getRequestDispatcher("order/order.jsp").forward(req, resp);
+//		} else {
+																								
+				HashMap<Integer, Cart> cartList = null;
+				cartList = new HashMap<>();
 		
-//		prodQuantity 재고, orderQuantity 주문수량. Update 메소드로 하기!!!!
-//		order.setProdQuantity(Integer.parseInt(req.getParameter("prodQuantity")));
+				HttpSession session = req.getSession();
+				cartList = (HashMap<Integer, Cart>) session.getAttribute("cartList");
+	
+				for (Cart cart : cartList.values()) {
+					Order order = new Order();
+					order.setUserID(cart.getUserID());
+					order.setProdID(cart.getProdID());
+					order.setProdName(cart.getProdName());
+					order.setProdPrice(cart.getProdPrice());
+					order.setOrderQuantity(cart.getOrderQuantity());
+					order.setFarmID(cart.getFarmID());
+	
+					boolean isSaved = orderDao.save(order);
+					
+					boolean userSaved = orderDao.userSave(order);
+	
+					String userID = (String) session.getAttribute("userID");
+					User user = orderDao.findByUserId(userID);
+	
+					if (user != null || isSaved) {
+						//req.setAttribute("order", order);
+						req.setAttribute("user", user);
+						RequestDispatcher rd = req.getRequestDispatcher("order/orderCheck.jsp");
+						rd.forward(req, resp);
+				}
+			}
 		
-		order.setTotalPrice(Integer.parseInt(req.getParameter("totalPrice")));
-		order.setFarmID(req.getParameter("farmID"));
-		order.setFarmTel(farmer.getFarmTel());
-		order.setFarmCheck(Boolean.parseBoolean(req.getParameter("farmCheck")));
-		order.setTrackNum(Integer.parseInt(req.getParameter("trackNum")));
-		order.setIs_status(req.getParameter("is_status"));
-		
-		boolean isSaved = orderDao.save(order); // 참이면 저장완료
 
-		if (isSaved) {
-			System.out.println("order테이블에 등록 완료!");
-			
-			req.setAttribute("order", order);
-			RequestDispatcher rd = req.getRequestDispatcher("order?cmd=list");
-			rd.forward(req, resp);
-		}
-		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 	}
 
 }

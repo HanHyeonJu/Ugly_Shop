@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -87,7 +88,9 @@ public class UpdateController extends HttpServlet {
 				boolean update = userDao.userupdate(user);
 
 				if (update) {
-					request.getRequestDispatcher("update/updateSuccess.jsp").forward(request, response);
+					request.setAttribute("user", user);
+					RequestDispatcher rd = request.getRequestDispatcher("update/updateSuccess.jsp");
+					rd.forward(request, response);
 				}
 			}
 
