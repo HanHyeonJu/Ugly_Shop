@@ -3,7 +3,7 @@
 <%
 	String manID =  (String)session.getAttribute("manID");
 	if(manID == null){
-		response.sendRedirect("../login/managerLogin.jsp");
+		response.sendRedirect(request.getContextPath() + "/login/managerLogin.jsp");
 	}  
 %>
 
@@ -21,7 +21,6 @@
 		<p>못난이 농산품 판매 사이트입니다.</p>
 	</div>
 </div>
-
 <jsp:include page="/includes/footer.jsp" />
 
 <script>
