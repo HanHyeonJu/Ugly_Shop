@@ -10,10 +10,11 @@ public class Review {
 	private String reviewContent;
 	private int prodID;
 	private String farmID;
+	private int orderID;
 	
 	public Review() { }
 	
-	public Review(String userID, LocalDate reviewDate, String reviewTitle, String reviewContent, int prodID, String farmID) {
+	public Review(String userID, LocalDate reviewDate, String reviewTitle, String reviewContent, int prodID, String farmID , int orderID) {
 		super();
 		this.userID = userID;
 		this.reviewDate = reviewDate;
@@ -21,6 +22,7 @@ public class Review {
 		this.reviewContent = reviewContent;
 		this.prodID = prodID;
 		this.farmID = farmID;
+		this.orderID = orderID;
 	}
 	
 	public int getReviewID() {
@@ -67,6 +69,15 @@ public class Review {
 	public void setFarmID(String farmID) {
 		this.farmID = farmID;
 	}
+	
+	public int getOrderID() {
+		return orderID;
+	}
+
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
+	}
+
 
 	@Override
 	public String toString() {
@@ -74,6 +85,7 @@ public class Review {
 				+ reviewTitle + ", reviewContent=" + reviewContent + ", prodID=" + prodID + ", farmID=" + farmID + "]";
 	}
 
+	
 
 }
 

@@ -3,9 +3,9 @@ package beans;
 public class Product {
 	private int prodID;
 	private String farmID;
+	private String farmTel;
 	private String prodName;
 	private int prodPrice;
-	private int prodInven;
 	private String prodImg;
 	private String prodInfo;
 	
@@ -44,14 +44,6 @@ public class Product {
 		this.prodPrice = prodPrice;
 	}
 
-	public int getProdInven() {
-		return prodInven;
-	}
-
-	public void setProdInven(int prodInven) {
-		this.prodInven = prodInven;
-	}
-
 	public String getProdImg() {
 		return prodImg;
 	}
@@ -67,11 +59,22 @@ public class Product {
 	public void setProdInfo(String prodInfo) {
 		this.prodInfo = prodInfo;
 	}
+	
+	public String getFarmTel() {
+		return farmTel;
+	}
+
+
+	public void setFarmTel(String farmTel) {
+		this.farmTel = farmTel;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Product [prodID=" + prodID + ", farmID=" + farmID + ", prodName=" + prodName + ", prodPrice=" + prodPrice + ", prodInven="
-				+ prodInven + ", prodImg=" + prodImg + ", prodInfo=" + prodInfo + "]";
+		return "Product [prodID=" + prodID + ", farmID=" + farmID + ", farmTel=" + farmTel + ", prodName=" + prodName
+				+ ", prodPrice=" + prodPrice + ", prodImg=" + prodImg + ", prodInfo=" + prodInfo + "]";
 	}
-
+	
+	
 }
