@@ -7,6 +7,15 @@ public class Farmer {
 	private String farmAdd;
 	private String farmTel;
 	
+	
+	public Farmer(String farmID, String farmPassword, String farmName, String farmAdd, String farmTel) {
+		this.farmID = farmID;
+		this.farmPassword = farmPassword;
+		this.farmName = farmName;
+		this.farmAdd = farmAdd;
+		this.farmTel = farmTel;
+	}
+	
 	public String getFarmID() {
 		return farmID;
 	}

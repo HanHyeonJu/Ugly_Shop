@@ -6,6 +6,20 @@ public class Reply {
 	private String replyContent;
 	private int reviewID;
 	private int prodID;
+	
+	public Reply() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Reply(String farmID, String replyContant, int reviewID) {
+		// 리뷰덧글테스트툥
+		super();
+		this.farmID = farmID;
+		this.replyContent = replyContant;
+		this.reviewID = reviewID;
+	}
+
+	
 
 	public int getReplyID() {
 		return replyID;
@@ -39,6 +53,11 @@ public class Reply {
 		this.reviewID = reviewID;
 	}
 
+	@Override
+	public String toString() {
+		return "Reply [ replyID=" + replyID + ", farmID=" + farmID + ", replyContant=" + replyContent + ", reviewID=" + reviewID + " ]";
+	}
+
 	public int getProdID() {
 		return prodID;
 	}
@@ -46,11 +65,5 @@ public class Reply {
 	public void setProdID(int prodID) {
 		this.prodID = prodID;
 	}
-
-	@Override
-	public String toString() {
-		return "Reply [replyID=" + replyID + ", farmID=" + farmID + ", replyContent=" + replyContent + ", reviewID="
-				+ reviewID + ", prodID=" + prodID + "]";
-	}
-
+	
 }
