@@ -62,7 +62,7 @@
 			</table>
 			<div>
 				<a href="<%=request.getContextPath()%>/order/order.jsp"
-					class="btn btn-success float-right">주문하기</a>
+					class="btn btn-success float-right" id="order">주문하기</a>
 				<a class="btn btn-primary me-2" href="<%= request.getContextPath() %>/ProdController2?cmd=list" role="button"> 쇼핑하기</a>
 			</div>
 		</div>
