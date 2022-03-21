@@ -27,14 +27,13 @@ public class OrderListDao {
 
 		try {
 			conn = dataSource.getConnection(); // DB연결
-			pstmt = conn.prepareStatement("SELECT * FROM `order`"); // sql문
+			pstmt = conn.prepareStatement("SELECT * FROM orders"); // sql문
 			rs = pstmt.executeQuery(); // 쿼리문 실행
 
-			while (rs.next()) { // 반복문으로 orders 리스트 저장			
+			while (rs.next()) { // 반복문으로 orders 리스트 저장
 				Order order = new Order();
-				
 				order.setOrderID(rs.getInt("orderID"));
-				order.setCartID(rs.getInt("cartID"));
+				order.setOrderNum(rs.getInt("orderNum"));
 				order.setUserID(rs.getString("userID"));
 				order.setUserName(rs.getString("userName"));
 				order.setUserAdd(rs.getString("userAdd"));
@@ -43,13 +42,11 @@ public class OrderListDao {
 				order.setProdName(rs.getString("prodName"));
 				order.setProdPrice(rs.getInt("prodPrice"));
 				order.setOrderQuantity(rs.getInt("orderQuantity"));
-				order.setProdQuantity(rs.getInt("prodQuantity"));
-				order.setTotalPrice(rs.getInt("totalPrice"));
 				order.setFarmID(rs.getString("farmID"));
 				order.setFarmTel(rs.getString("farmTel"));
 				order.setFarmCheck(rs.getBoolean("farmCheck"));
-				order.setTrackNum(rs.getInt("trackNum"));
-				order.setIs_status( rs.getString("is_status"));
+				order.setTrackNum(rs.getString("trackNum"));
+				order.setIs_status(rs.getString("is_status"));
 				
 				ordersList.add(order);
 			}
@@ -68,32 +65,30 @@ public class OrderListDao {
 		Order order = null;
 		try {
 			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement("select * from `order` where orderID = ?");
+			pstmt = conn.prepareStatement("select * from orders where orderID = ?");
 			pstmt.setInt(1, orderID);	
 			
 			rs = pstmt.executeQuery();
 			
-			if (rs.next()) {
+			while (rs.next()) {
 				order = new Order();
-				
 				order.setOrderID(rs.getInt("orderID"));
-				order.setCartID(rs.getInt("cartID"));
+				order.setOrderNum(rs.getInt("orderNum"));
 				order.setUserID(rs.getString("userID"));
+				order.setUserName(rs.getString("userName"));
 				order.setUserAdd(rs.getString("userAdd"));
 				order.setUserTel(rs.getString("userTel"));
 				order.setProdID(rs.getInt("prodID"));
 				order.setProdName(rs.getString("prodName"));
 				order.setProdPrice(rs.getInt("prodPrice"));
 				order.setOrderQuantity(rs.getInt("orderQuantity"));
-				order.setProdQuantity(rs.getInt("prodQuantity"));
-				order.setTotalPrice(rs.getInt("totalPrice"));
 				order.setFarmID(rs.getString("farmID"));
 				order.setFarmTel(rs.getString("farmTel"));
 				order.setFarmCheck(rs.getBoolean("farmCheck"));
-				order.setTrackNum(rs.getInt("trackNum"));
-				order.setIs_status( rs.getString("is_status"));
+				order.setTrackNum(rs.getString("trackNum"));
+				order.setIs_status(rs.getString("is_status"));
+				
 			}
-
 		} catch (Exception e) {
 			System.out.println("특정 주문 내역 출력 SQL에러");
 			e.printStackTrace();
@@ -102,20 +97,21 @@ public class OrderListDao {
 		}
 
 		System.out.println("1개의 주문 내역 검색 완료");
-
+		System.out.println(order.toString());
 		return order;
 	}
+	
 
-	public boolean update(int orderID, boolean farmCheck, int trackNum, String is_status) {
+	public boolean update(Order order) {
 		boolean rowAffected = false;
 
 		try {
 			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement("update `order` set farmCheck = ?, trackNum = ?, is_status =? where orderid = ?");
-			pstmt.setBoolean(1, farmCheck);
-			pstmt.setInt(2, trackNum);
-			pstmt.setString(3, is_status);
-			pstmt.setInt(4, orderID);
+			pstmt = conn.prepareStatement("update orders set farmCheck = ?, trackNum = ?, is_status =? where orderid = ?");
+			pstmt.setBoolean(1, order.isFarmCheck());
+			pstmt.setString(2, order.getTrackNum());
+			pstmt.setString(3, order.getIs_status());
+			pstmt.setInt(4, order.getOrderID());
 
 			rowAffected = pstmt.executeUpdate() > 0;
 
@@ -135,7 +131,7 @@ public class OrderListDao {
 
 		try {
 			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement("delete from `order` where orderid = ?");
+			pstmt = conn.prepareStatement("delete from orders where orderid = ?");
 			pstmt.setInt(1, orderId);
 
 			rowDeleted = pstmt.executeUpdate() > 0; // 실제 쿼리를 실행 -> 삭제되면 true

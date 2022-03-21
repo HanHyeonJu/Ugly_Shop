@@ -50,6 +50,36 @@ public class ReplyDao {
 		return reply;	
     }
     
+    public Reply prodfind(int id) {
+    	Reply reply = null;
+    	
+    	try {
+			conn = datasource.getConnection();
+			pstmt = conn.prepareStatement("select * from reply where prodID=?");
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();	// 리턴받은 데이터를 rs객체에 저장
+			
+			while(rs.next()) {
+				// 리턴받은 데이터를 Reply객체에 각각 저장
+				reply = new Reply();
+				reply.setReplyID(rs.getInt("replyID"));
+				reply.setFarmID(rs.getString("farmID"));
+				reply.setReplyContent(rs.getString("replyContent"));
+				reply.setReviewID(rs.getInt("reviewID"));
+				
+		    	System.out.println("덧글 찾기 성공");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL에러 - find");
+		} finally {
+			closeAll();
+		}
+		return reply;	
+    }
+    
+    
     public boolean save(Reply reply) {
     	boolean rowsaved = false;
     	
