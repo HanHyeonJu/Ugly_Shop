@@ -73,7 +73,8 @@ public class LoginController extends HttpServlet {
 			
 			manager.setManID(manID);
 			manager.setManPassword(manPassword);
-
+			System.out.println(manager.getManID()+ " " + manager.getManPassword());
+			
 			int result = managerDao.login(manID, manPassword);
 			
 			if (result == 1) {
