@@ -14,12 +14,12 @@
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css&logoColor=1572B6"/></a>
+<img src="https://simpleicons.org/icons/css3.svg?style=for-the-badge&logo=css&logoColor=1572B6"/></a>
 <img src="https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000"/></a>
 <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/Apache Tomcat-%23121011.svg?style=for-the-badge&logo=github&logoColor= F8DC75"/></a>
+<img src="https://simpleicons.org/icons/apachetomcat.svg?style=for-the-badge&logo=github&logoColor= F8DC75"/></a>
 
 ## 역할분담
 - 김언정 : 농민 사이트
