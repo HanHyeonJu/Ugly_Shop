@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="/includes/header.jsp" />
+
+<%
+	String manID =  (String)session.getAttribute("manID");
+	if(manID == null){
+		response.sendRedirect(request.getContextPath() + "/login/managerLogin.jsp");
+	}  
+%>
 
 <div class="container-fluid">
   <div class="font-weight-bold mt-3 shadow p-3 mb-4 bg-light rounded">리뷰</div>
@@ -22,7 +30,7 @@
             <tr>
               <td><c:out value="${reviews.reviewID}" /></td>
               <td>
-                <a href="<%= request.getContextPath() %>/reviewController?cmd=view&reviewID=<c:out value='${reviews.reviewID}'/>"><c:out value="${reviews.reviewTitle}" /></a>
+                <a href="<%= request.getContextPath() %>/reviewController?cmd=view&id=<c:out value='${reviews.reviewID}'/>"><c:out value="${reviews.reviewTitle}" /></a>
               </td>
               <td><c:out value="${reviews.userID}" /></td>
               <td><c:out value="${reviews.reviewDate}" /></td>
