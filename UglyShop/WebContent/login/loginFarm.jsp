@@ -32,7 +32,7 @@
             </div>
             <div class="form-group mt-3">
               <button type="submit" class="btn btn-outline-danger">로그인</button>
-              <a class="btn btn-outline-primary me-2" href="loginUser.jsp" role="button"> 고객 로그인</a>
+              <a class="btn btn-outline-primary me-2" href="<%= request.getContextPath() %>/login/loginUser.jsp" role="button"> 고객 로그인</a>
 			  <a id="custom-login-btn" href="javascript:loginWithKakao()"> 
 			  <img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="180" alt="카카오 로그인 버튼" /></a></div>
           </form>

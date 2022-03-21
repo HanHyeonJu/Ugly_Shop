@@ -20,7 +20,7 @@
 <div class="container">
       <div class="row mt-5">
         <div class="col-md-6 mx-auto">
-          <h2>로그인</h2>
+          <h2>고객 로그인</h2>
           <form action="<%=request.getContextPath()%>/userLogin?action=dologin" method="post">
           	<div class="form-group">
             <label for="username">아이디 :</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group mt-3">
               <button type="submit" class="btn btn-outline-danger">로그인</button>
-			  			<a class="btn btn-outline-success me-2" href="loginFarm.jsp" role="button"> 농민 로그인</a>
+			  			<a class="btn btn-outline-success me-2" href="<%= request.getContextPath() %>/login/loginFarm.jsp" role="button"> 농민 로그인</a>
 				 			<a id="custom-login-btn" href="javascript:loginWithKakao()"> 
 			  			<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="180" alt="카카오 로그인 버튼" /></a></div>
           </form>
