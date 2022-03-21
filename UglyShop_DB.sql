@@ -1,10 +1,11 @@
 CREATE DATABASE IF NOT EXISTS shop
 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 use shop;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user( 
-	userID  VARCHAR(20) default '' NOT NULL, 
+    userID  VARCHAR(20) default '' NOT NULL, 
     userPassword VARCHAR(20) default '' NOT NULL,
     userName VARCHAR(20)default '' NOT NULL,
     userAdd VARCHAR(50),
@@ -14,7 +15,7 @@ CREATE TABLE user(
 
 DROP TABLE IF EXISTS farmer;
 CREATE TABLE farmer( 
-	farmID  VARCHAR(20) DEFAULT '' NOT NULL, 
+    farmID  VARCHAR(20) DEFAULT '' NOT NULL, 
     farmPassword VARCHAR(20) default '' NOT NULL,
     farmName VARCHAR(20) default '' NOT NULL,
     farmAdd VARCHAR(50),
@@ -24,14 +25,14 @@ CREATE TABLE farmer(
 
 DROP TABLE IF EXISTS manager;
 CREATE TABLE manager(
-	manID  VARCHAR(20) default '' NOT NULL, 
+    manID  VARCHAR(20) default '' NOT NULL, 
     manPassword VARCHAR(20) default '' NOT NULL,
     primary key(manID)
 );
 
 DROP TABLE IF EXISTS product;
 CREATE TABLE product(
-	prodID INT NOT NULL auto_increment, 
+    prodID INT NOT NULL auto_increment, 
     farmID VARCHAR(20) default '' NOT NULL,
     farmTel VARCHAR(20) default '' NOT NULL,
     prodName VARCHAR(20) default '' NOT NULL,
@@ -44,8 +45,8 @@ CREATE TABLE product(
 
 DROP TABLE IF EXISTS review;
 CREATE TABLE review(
-	reviewID INT NOT NULL auto_increment, 
-	userID VARCHAR(20) default '' NOT NULL,
+    reviewID INT NOT NULL auto_increment, 
+    userID VARCHAR(20) default '' NOT NULL,
     reviewDate datetime,
     reviewTitle varchar(50),
     reviewContent varchar(2048),
@@ -59,30 +60,29 @@ CREATE TABLE review(
 
 DROP TABLE IF EXISTS reply;
 CREATE TABLE reply(
-	replyID INT NOT NULL auto_increment, 
-	farmID VARCHAR(20) default '' NOT NULL,
+    replyID INT NOT NULL auto_increment, 
+    farmID VARCHAR(20) default '' NOT NULL,
     replyContent varchar(2048),
     reviewID INT,
     prodID INT,
     primary key(replyID),
-	foreign key(reviewID) references review(reviewID)  on update cascade on delete cascade,
-   foreign key(prodID) references product(prodID)  on update cascade on delete cascade 
+   foreign key(reviewID) references review(reviewID)  on update cascade on delete cascade
 );
 
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders(
-	orderID INT NOT NULL auto_increment, 
+    orderID INT NOT NULL auto_increment, 
     orderNum INT,
-	userID VARCHAR(20),
+    userID VARCHAR(20),
     userName VARCHAR(20) default '' NOT NULL,
     userAdd VARCHAR(50),
     userTel VARCHAR(20) default '' NOT NULL,
     prodID INT,
     prodPrice INT,
     prodName VARCHAR(20) default '' NOT NULL,
-	orderQuantity INT,
+    orderQuantity INT,
     totalPrice INT,
-	farmID  VARCHAR(20) default '' NOT NULL, 
+    farmID  VARCHAR(20) default '' NOT NULL, 
     farmTel VARCHAR(20) default '' NOT NULL,
     farmCheck VARCHAR(20) default '' NOT NULL,
     trackNum VARCHAR(20),
