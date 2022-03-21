@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/765/765544.png" type="image/x-icon">
     <title>못난이 농산품(농민)</title>
+     <style>
+		.navbar-brand {
+			margin-left: 20px;
+		}
+		.margin {
+			margin-right: 20px;
+		}
+	</style>
   </head>
   <body>
     <header>
@@ -32,11 +40,6 @@
 				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/ProdController?cmd=list">농산품</a></li>
 				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/reviewController?cmd=list">리뷰</a></li>
 			</ul>
-			<form class="d-flex mb-2 mb-auto">
-				<input class="form-control" type="search" placeholder="Search"
-					aria-label="Search">
-				<button class="btn btn-secondary me-2" type="submit">Search</button>
-			</form>
 			<%
 					if(farmID == null){
 			%>
