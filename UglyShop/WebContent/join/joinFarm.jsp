@@ -41,8 +41,8 @@
 						<input type="text" class="form-control mb-3 mt-3" name="farmTel"
 							placeholder="전화번호" maxlength="20" required> 
 						<div class="form-group mt-3">
-			              <button type="submit" class="btn btn-dark" style= "width:320pt">농민 가입하기</button>
-			              <a class="btn btn-primary me-2 mt-3" style= "width:320pt" href="joinUser.jsp" role="button"> 고객 회원가입</a>
+			              <button type="submit" class="btn btn-dark" style= "width:271pt">농민 가입하기</button>
+			              <a class="btn btn-primary me-2 mt-3" style= "width:271pt" href="joinUser.jsp" role="button"> 고객 회원가입</a>
 			            </div>
 								
 					</form>

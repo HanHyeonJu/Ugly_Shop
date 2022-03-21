@@ -33,8 +33,8 @@
               <input type="text" class="form-control mb-3" name="userAdd" placeholder="주소" maxlength="50" required />
               <input type="text" class="form-control mb-3 mt-3" name="userTel" placeholder="전화번호" maxlength="20" required />
               <div class="form-group mt-3">
-			     <button type="submit" class="btn btn-dark" style= "width:320pt">고객 가입하기</button>
-			     <a class="btn btn-primary me-2 mt-3" style= "width:320pt" href="joinFarm.jsp" role="button"> 농민 회원가입</a>
+			     <button type="submit" class="btn btn-dark" style= "width:271pt">고객 가입하기</button>
+			     <a class="btn btn-primary me-2 mt-3" style= "width:271pt" href="joinFarm.jsp" role="button"> 농민 회원가입</a>
 			  </div>
             </form>
           </div>
