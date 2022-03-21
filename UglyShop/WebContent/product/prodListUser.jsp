@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../includes/headerUser.jsp" />
 <style>
-  .container {
-    background-color: darkseagreen;
-  }
   .container2 {
     margin-top: 40px;
   }
@@ -47,7 +44,7 @@
   }
 </style>
 
-<div class="container px-4 px-lg-2 mt-5" style="background-color: rgb(255, 251, 251)">
+<div class="container px-4 px-lg-2 mt-5">
 <table class="table">
   <thead class="head">
     <tr>
@@ -61,7 +58,7 @@
   <tbody class="box">
     <c:forEach var="products" items="${products}">
       <tr>
-        <td style="background-color: khaki;"><img class="ProdImg" src="<%= request.getContextPath() %>/assets/img/<c:out value='${products.prodImg}' />.jpg" alt="상품사진">
+        <td><img class="ProdImg" src="<%= request.getContextPath() %>/assets/img/<c:out value='${products.prodImg}' />.jpg" alt="상품사진">
         </td>
         <td><h5><c:out value="${products.prodName}" /></h5></td>
         <td>판매자: <c:out value="${products.farmID}" /></td>
