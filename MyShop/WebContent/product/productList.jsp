@@ -4,9 +4,6 @@
 <jsp:include page="/includes/header.jsp" />
 
 <style>
-  .container {
-    background-color: darkseagreen;
-  }
   .container2 {
     margin-top: 40px;
   }
@@ -55,7 +52,7 @@
   <a href="<%=request.getContextPath()%>/product/saveProductForm.jsp" class="btn btn-info float-right">상품 등록</a>
   </div>
 
-<div class="container px-4 px-lg-2 mt-5" style="background-color: rgb(255, 251, 251)">
+<div class="container px-4 px-lg-2 mt-5">
 <table class="table">
   <thead class="head">
     <tr>
@@ -69,15 +66,13 @@
   <tbody class="box">
     <c:forEach var="products" items="${prodList}">
       <tr>
-        <div style="background-color: khaki;">
         <td>
-          <img class="ProdImg" src="<%= request.getContextPath() %>/assets/img/${products.prodImg}" alt="상품사진">
+          <img class="ProdImg" src="<%= request.getContextPath() %>/assets/img/<c:out value='${products.prodImg}' />.jpg" alt="상품사진">
         </td>
         <td><h5><c:out value="${products.prodName}" /></h5></td>
         <td>판매자: <c:out value="${products.farmID}" /></td>
         <td><c:out value="${products.prodPrice}" />원</td>
         <td><a class="btn btn-secondary mt-auto" href="<%= request.getContextPath() %>/managerProduct?cmd=find&prodID=${products.prodID}">자세히 보기</a></td>
-      </div>
       </tr>
     </c:forEach>
   </tbody>
@@ -96,3 +91,4 @@
 </script>
 
 <script src="assets/js/prodList.js"></script>
+

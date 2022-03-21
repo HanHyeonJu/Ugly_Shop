@@ -5,10 +5,8 @@
 <jsp:include page="/includes/header.jsp" />
 
 <div class="container">
-	<div class="font-weight-bold mt-3 shadow p-3 mb-4 bg-light rounded">상품 정보 등록</div>
-	
-	<form action="<%=request.getContextPath()%>/managerProduct?cmd=save" method="post">
-
+	<div class="font-weight-bold mt-3 shadow p-3 mb-4 bg-light rounded">상품 정보 수정</div>
+		<form action="<%=request.getContextPath()%>/managerProduct?cmd=update" method="post">
 		<div class="form-group">
 			<label for="farmID">농민ID</label> 
 			<input type="text" class="form-control" id="farmID" name="farmID" value="${product.farmID}" required />
@@ -30,17 +28,19 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="prodImg">이미지</label> 
-			<input type="text" class="form-control" id="prodImg" name="prodImg" placeholder="상품이미지는 해당 이메일로 전송 부탁드립니다(ha10155@naver.com)" readonly />
+			<label for="prodImg">이미지(변경 원할 시 해당 관리자에게 문의)</label> 
+			<input type="text" class="form-control" id="prodImg" name="prodImg" value="${product.prodImg}" required readonly />
 		</div>
 		
 		<div class="form-group">
 			<label for="prodInfo">상품정보</label> 
 			<input type="text" class="form-control" id="prodInfo" name="prodInfo" value="${product.prodInfo}" required maxlength="50" />
 		</div>
-	
-	
-			<button type="submit" class="btn btn-success">등록하기</button>
+		
+		<div class="form-group">
+			<input type="hidden" class="form-control" id="prodID" name="prodID" value="${product.prodID}"/>
+		</div>
+			<button type="submit" class="btn btn-success">수정하기</button>
 			<a class="btn btn-secondary" href="<%= request.getContextPath() %>/managerProduct?cmd=list">취소</a>
 	</form>
 </div>
