@@ -1,26 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../includes/headerUser.jsp" />
 <style>
+  h4 {
+    margin-bottom: 20px;
+  }
   .review {
-    background-color: lightblue;
+    background-color: rgb(243, 243, 243);
+    padding: 10px 20px;
+  }
+  .info {
+    display: flex;
+  }
+  .info > p {
+    justify-content: right;
+    margin-right: 25px;
   }
   .reply {
-    background-color: bisque;
+    /* background-color: bisque; */
+    margin-top: 30px;
+    padding: 10px 20px;
   }
   .replyEdit {
-    background-color: rgb(154, 205, 255);
+    /* background-color: rgb(154, 205, 255); */
   }
   .content {
     margin-top: 30px;
   }
-  #replySubmit {
-    margin-top: 20px;
+  .viewList {
+    margin: 20px 0 0 20px;
   }
 </style>
-<h2>review detail 페이지 고객ver</h2>
-<br /><br />
-<!-- <div class="row mt-5"> -->
-<div class="col-md-8 mx-auto">
+
+
+<div class="col-md-8 mx-auto mt-3">
   <div class="review">
     <h4>제목: <c:out value="${review.reviewTitle}" /></h4>
     <p>리뷰글번호: <c:out value="${review.reviewID}" /></p>
@@ -40,9 +52,10 @@
       </c:if>
      </c:if>
   </div>
-  <hr />
+
   <!-- reply.farmID에 값이 있을때만 출력(ne가 !=와 같음) -->
   <c:if test="${reply.farmID ne null }">
+  <form id="replyWrite" name="replyEdit" action="<%= request.getContextPath() %>/replyController" method="post">
     <div class="reply">
       <p>덧글번호: <c:out value="${reply.replyID}" /></p>
       <p>판매자ID: <c:out value="${reply.farmID}" /></p>
@@ -50,11 +63,9 @@
       <p><c:out value="${reply.replyContent}" /></p>
       <p>리뷰글번호: <c:out value="${reply.reviewID}" /></p>
     </div>
+    </form>
   </c:if>
-  <hr />
-  <div class="back">
-  <button  onclick = "location.href = '<%=request.getContextPath()%>/reviewController2?cmd=list' " type="button" class="btn btn-primary">뒤로가기</button> <!-- 뒤로가기.리스트로 이동  -->
-  </div>
+
 </div>
 
 

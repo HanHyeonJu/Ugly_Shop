@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import = "dao.ReviewDao"%>   
+<%@ page import = "dao.ReviewDAO"%>   
 <%@ page import = "dao.UserDAO"%>   
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 <jsp:include page="../includes/headerUser3.jsp" />
 
-	<h2>리뷰 수정 페이지 고객ver</h2>		
+	<h2>리뷰 수정 페이지 </h2>		
 	<br><br><br>
 	<div class="container" style="display: flex; flex-direction: column;text-align: center; width: 30rem;">
 		
@@ -37,7 +37,6 @@
 			</table>
 			
 			<div  style="text-align:center; align-content: center; ">
-				<button  onclick = "location.href = '<%=request.getContextPath()%>/reviewController2' " type="button" class="btn btn-primary">취소</button> <!-- 수정해야함! 리뷰 상세페이지로 이동하기  -->
 				<input type="submit" class="btn btn-success" value="수정 등록">		
 			</div>
 			
