@@ -10,28 +10,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import beans.Reply;
 import beans.Review;
-import dao.ReplyDao;
-import dao.ReviewDao;
+import dao.ReplyDAO;
+import dao.ReviewDAO;
 
 
 @WebServlet("/reviewController2")
 public class ReviewController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ReviewDao reviewDao;
-	private ReplyDao replyDao;
+	private ReviewDAO reviewDao;
+	private ReplyDAO replyDao;
 	
 	@Resource(name = "jdbc/shop")
 	private DataSource datasource;
 	
 	@Override
 	public void init() throws ServletException {
-		reviewDao = new ReviewDao(datasource);
-		replyDao = new ReplyDao(datasource);
+		reviewDao = new ReviewDAO(datasource);
+		replyDao = new ReplyDAO(datasource);
 	}
        
 
@@ -40,8 +41,7 @@ public class ReviewController2 extends HttpServlet {
     }
 
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("cmd");
@@ -54,6 +54,9 @@ public class ReviewController2 extends HttpServlet {
 		try {
 			
 			switch (action) {
+			case "save":
+				save(request, response);
+				break;
 			case "view":		// 리뷰상세페이지에 들어갔을때 
 				view(request, response);
 				break;
@@ -79,6 +82,41 @@ public class ReviewController2 extends HttpServlet {
 		} finally {}
 	}
 	
+
+
+
+	private void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Review review = new Review();
+		String userID = request.getParameter("userID"); //로그인 하면 넘어옴
+		int orderID = Integer.parseInt(request.getParameter("orderID"));
+		int prodID = Integer.parseInt(request.getParameter("prodID"));
+		
+		review.setUserID(userID);
+		//review.setReviewDate(request.getParameter("reviewDate").toLocalDate()); //SQL날짜->자바날짜
+		review.setReviewTitle(request.getParameter("title"));
+		review.setReviewContent(request.getParameter("content"));
+		review.setProdID(prodID);
+		review.setOrderID(orderID);
+		review.setFarmID(request.getParameter("farmID"));
+		
+		boolean isSaved = reviewDao.save(review); //db 저장시 id는 자동생성
+		
+		if(isSaved) {
+			System.out.println("입력완료");
+			
+			//reviewID를 저장하기 위해
+			Review review2 = reviewDao.findReview(userID, prodID);
+			
+			request.setAttribute("review",review2);
+		
+			RequestDispatcher rd = request.getRequestDispatcher("review/reviewDetailUser.jsp");
+			rd.forward(request, response);
+			
+		}//상세페이지로
+		
+	}
+
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Review review = new Review();
 		
@@ -156,7 +194,7 @@ public class ReviewController2 extends HttpServlet {
 	
 	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 상품상세페이지에서 리뷰를 보러갈때: 각 리뷰에 저장된 prodID로 검색해 해당상품의 리뷰만 띄워줌 
-int prodID = Integer.parseInt(request.getParameter("prodID"));
+		int prodID = Integer.parseInt(request.getParameter("prodID"));
 		
 		List<Review> reviews = reviewDao.findProd(prodID);	// DB에서 조건에 맞는 모든 리뷰를 가져옴
 		
@@ -179,5 +217,4 @@ int prodID = Integer.parseInt(request.getParameter("prodID"));
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

@@ -85,7 +85,7 @@ public class UpdateController extends HttpServlet {
 				request.setAttribute("message", "p");
 				request.getRequestDispatcher("update/userUpdate.jsp").forward(request, response);
 			} else {
-				boolean update = userDao.userupdate(user);
+				boolean update = userDao.userUpdate(user);
 
 				if (update) {
 					request.setAttribute("user", user);

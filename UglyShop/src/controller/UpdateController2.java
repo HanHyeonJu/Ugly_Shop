@@ -80,7 +80,7 @@ public class UpdateController2 extends HttpServlet {
 			farmer.setFarmAdd(request.getParameter("farmAdd"));
 			farmer.setFarmTel(request.getParameter("farmTel"));
 
-			boolean update = farmerDao.farmerupdate(farmer);
+			boolean update = farmerDao.farmerUpdate(farmer);
 
 			if (update) {
 				request.setAttribute("farmer", farmer);

@@ -14,24 +14,24 @@ import javax.sql.DataSource;
 
 import beans.Reply;
 import beans.Review;
-import dao.ReplyDao;
-import dao.ReviewDao;
+import dao.ReplyDAO;
+import dao.ReviewDAO;
 
 
 @WebServlet("/reviewController")
 public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ReviewDao reviewDao;
-	private ReplyDao replyDao;
+	private ReviewDAO reviewDao;
+	private ReplyDAO replyDao;
 	
 	@Resource(name = "jdbc/shop")
 	private DataSource datasource;
 	
 	@Override
 	public void init() throws ServletException {
-		reviewDao = new ReviewDao(datasource);
-		replyDao = new ReplyDao(datasource);
+		reviewDao = new ReviewDAO(datasource);
+		replyDao = new ReplyDAO(datasource);
 	}
        
 
@@ -63,9 +63,6 @@ public class ReviewController extends HttpServlet {
 			case "find":		// 상품상세페이지>리뷰보기 로 접근했을때
 				find(request, response);
 				break;
-//			case "delete":
-//				delete(request, response);
-//				break;
 			default:			// 이외의 값이 들어오면 리뷰리스트를 보여줌
 				list(request, response);
 				break;
@@ -73,18 +70,6 @@ public class ReviewController extends HttpServlet {
 		} finally {}
 	}
 	
-//	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-//		int id = Integer.parseInt(request.getParameter("reviewID")); 
-//		
-//		boolean delete = reviewDao.delete(id);
-//		
-//		if(delete) {
-//			list(request, response);
-//		}else {
-//			System.out.println("삭제실패");
-//		}
-//		
-//	}
 	private void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 리뷰상세페이지에 접속했을때 해당리뷰 하나의 모든 정보를 나열하도록
 		int id = Integer.parseInt(request.getParameter("id"));

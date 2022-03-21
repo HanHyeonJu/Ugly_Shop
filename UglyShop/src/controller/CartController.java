@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,21 +16,21 @@ import javax.sql.DataSource;
 
 import beans.Cart;
 import beans.Product;
-import dao.ProductDao;
+import dao.ProductDAO;
 
 @WebServlet("/cart")
 public class CartController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private ProductDao productDao;
+	private ProductDAO productDao;
 
 	@Resource(name = "jdbc/shop")
 	private DataSource dataSource;
 
 	@Override
 	public void init() throws ServletException {
-		productDao = new ProductDao(dataSource);
+		productDao = new ProductDAO(dataSource);
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class CartController extends HttpServlet {
 			cartList = new HashMap<>();
 			
 			
-			cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), 1, userID, farmID)); // OrderQuantity 는 당연히 처음 상품을 넣는 거니까 1을 집어넣어줘야겠지 
+			cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), 1, userID, farmID, prod.getFarmTel())); // OrderQuantity 는 당연히 처음 상품을 넣는 거니까 1을 집어넣어줘야겠지 
 			session.setAttribute("cartList", cartList); // 세션에 장바구니 목록을 set한다.
 		} else { // 세션에 장바구니 목록이 이미 있을경우.
 			// 세션에 있던 장바구니 목록을 들고와서(cartId로..) cartList에 담는다.
@@ -58,10 +59,10 @@ public class CartController extends HttpServlet {
 			if (cartList.containsKey(prodID)) { // 장바구니 안에 이미 같은 상품이 있을 경우. ++수량 을 해주고 다시 세션에 집어넣음.
 				int qty = cartList.get(prodID).getOrderQuantity();
 			
-				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), ++qty, userID, farmID));
+				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), ++qty, userID, farmID, prod.getFarmTel()));
 				session.setAttribute("cartList", cartList);
 			} else { // 장바구니 안에 같은 상품이 없을 경우, 상품 수량은 1을 put해준다.
-				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), 1, userID, farmID));
+				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), 1, userID, farmID, prod.getFarmTel()));
 				session.setAttribute("cartList", cartList);
 				//cartList.values();
 			}
@@ -89,7 +90,7 @@ public class CartController extends HttpServlet {
 		HttpSession session = req.getSession();
 		String userID = (String)session.getAttribute("userID");
 		String farmID = req.getParameter("farmID");
-
+		
 		HashMap<Integer, Cart> cartList = (HashMap<Integer, Cart>) session.getAttribute("cartList");
 
 		
@@ -102,7 +103,7 @@ public class CartController extends HttpServlet {
 				int cartId = Integer.parseInt(id);
 				cartList.remove(cartId);				
 				return;			
-			}
+			} 
 		}
 		
 		
@@ -117,12 +118,12 @@ public class CartController extends HttpServlet {
 			if(cartList.size() == 0) {
 				session.removeAttribute("cartList");
 			} else {
-				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), --qty, userID, farmID));
+				cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), --qty, userID, farmID, prod.getFarmTel()));
 			}
 			
 			session.setAttribute("cartList", cartList);
 		} else {
-			cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), --qty, userID, farmID));
+			cartList.put(prodID, new Cart(prodID, prod.getProdName(), prod.getProdPrice(), --qty, userID, farmID, prod.getFarmTel()));
 			session.setAttribute("cartList", cartList);
 		}
 		
@@ -133,5 +134,7 @@ public class CartController extends HttpServlet {
 			out.print(cart.toString());
 		}
 	}
+	
+	
 
 }
