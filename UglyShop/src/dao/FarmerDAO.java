@@ -119,7 +119,7 @@ public class FarmerDAO {
 			return result;
 		}
 	
-	public boolean farmerupdate(Farmer farmer) {
+	public boolean farmerUpdate(Farmer farmer) {
 		
 		boolean update = false;
 		

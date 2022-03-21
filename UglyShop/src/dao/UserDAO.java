@@ -119,7 +119,7 @@ public class UserDAO {
 			return result;
 		}
 	
-	public boolean userupdate(User user) {
+	public boolean userUpdate(User user) {
 		boolean update = false;
 		
 		try {
