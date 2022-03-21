@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css"/>
+<%
+	String manID =  (String)session.getAttribute("manID");
+	if(manID == null){
+		response.sendRedirect(request.getContextPath() + "/login/managerLogin.jsp");
+	}  
+%>
 <jsp:include page="/includes/header.jsp" />
 
 <div class="container-fluid">
@@ -16,8 +23,8 @@
         <th>총결제금액</th>
         <th>농민ID</th>
         <th class="th-2">농민 연락처</th>
-        <th class="th-1">발주</th>
-        <th class="th-2">송장 번호</th>
+     	<th class="th-1">발주</th>
+        <th class="th-2">송장번호</th>
         <th>배송현황</th>
         <th class="th-1">수정</th>
         <th class="th-1">삭제</th>
@@ -25,17 +32,17 @@
     </thead>
     <tbody>
       <!-- controller 에서 저장한 ordersList(변수 : List<OrderList> ordersList)가 여기로 넘어옴 -->
-      <c:forEach var="order" items="${orderList}">
+      <c:forEach var="order" items="${ordersList}">
         <tr>
           <td class="th-1"><c:out value="${order.orderID}" /></td>
           <td><c:out value="${order.userID}" /></td>
           <td><c:out value="${order.userName}" /></td>
           <td class="th-2"><c:out value="${order.userAdd}" /></td>
           <td class="th-2"><c:out value="${order.userTel}" /></td>
-          <td><c:out value="${order.totalPrice}" /></td>
+          <td><c:out value="${order.prodPrice*order.orderQuantity}" /></td>
           <td><c:out value="${order.farmID}" /></td>
           <td class="th-2"><c:out value="${order.farmTel}" /></td>
-          <td class="farmCheck th-1"><c:out value="${order.farmCheck}" /></td>
+   		  <td class="farmCheck th-1"><c:out value="${order.farmCheck}" /></td>
           <td class="th-2"><c:out value="${order.trackNum}" /></td>
           <td><c:out value="${order.is_status}" /></td>
           <td class="th-1">
@@ -57,7 +64,7 @@
 <script>
   $('.nav-link').removeClass('active');
   $('#m-order').addClass('active');
-  var path = '<%= request.getContextPath()%>';
+  var path = '<%= request.getContextPath() %>';
 </script>
 
 <script src="assets/js/list.js"></script>
