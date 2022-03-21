@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%
+	String manID =  (String)session.getAttribute("manID");
+	if(manID == null){
+		response.sendRedirect(request.getContextPath() + "/login/managerLogin.jsp");
+	}  
+%>
 <jsp:include page="/includes/header.jsp" />
 
-<div class="container-fluid">
+<div class="col-md-8 mx-auto">
 	<div class="font-weight-bold mt-3 shadow p-3 mb-4 bg-light rounded">고객 및 농민 관리</div>
 
-	<div class="container">
 		<div class="dropdown">
 			<button class="btn btn-primaty dropdown-toggle" data-toggle="dropdown">
 			고객/농민
@@ -17,7 +21,6 @@
 				<a class="dropdown-item" href="<%=request.getContextPath()%>/member?cmd=farmerList">농민</a>
 			</div>
 		</div>
-	</div>
 
 	<%
 		String cmd = request.getParameter("cmd");
@@ -26,17 +29,14 @@
 	<%
 		if (cmd == null) {
 	%>
-	<div class="container">
 		<div class="jumbotron mt-5">
 			<h1 class="display-4">DropDown에서</h1>
 			<br>
 			<h1 class="display-4">고객 혹은 농민을 선택해주세요</h1>
 		</div>
-	</div>
 	<%
 		} else if (cmd.equals("userList")) {
 	%>
-	<div class="container">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -62,11 +62,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 	<%
 		} else if (cmd.equals("farmerList")) {
 	%>
-	<div class="container">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -92,7 +90,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 	<%
 		}
 	%>
