@@ -12,7 +12,7 @@
 					<form method="post">
 						<h6 class="text-center mb-3">${userID }님의고객정보</h6>
 						<input class="form-control mb-3" name="userID"
-							placeholder="아이디" value="${userID}" maxlength="20" disabled /> <input
+							value="${userID}" maxlength="20" disabled /> <input
 							type="password" class="form-control mb-3" name="userPassword"
 							placeholder="패스워드" value= <c:out value="${user.userPassword}" /> maxlength="20"
 							disabled /> <input type="text" class="form-control mb-3"

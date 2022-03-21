@@ -12,7 +12,7 @@
 					<form method="post">
 						<h6 class="text-center mb-3">${farmID }님의고객정보</h6>
 						<input class="form-control mb-3" name="farmID"
-							placeholder="아이디" value="${farmID}" maxlength="20" disabled /> <input
+							value="${farmID}" maxlength="20" disabled /> <input
 							type="password" class="form-control mb-3" name="farmPassword"
 							placeholder="패스워드" value= <c:out value="${farmer.farmPassword}" /> maxlength="20"
 							disabled /> <input type="text" class="form-control mb-3"
