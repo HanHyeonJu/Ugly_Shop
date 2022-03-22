@@ -81,7 +81,6 @@ CREATE TABLE orders(
     prodPrice INT,
     prodName VARCHAR(20) default '' NOT NULL,
     orderQuantity INT,
-    totalPrice INT,
     farmID  VARCHAR(20) default '' NOT NULL, 
     farmTel VARCHAR(20) default '' NOT NULL,
     farmCheck VARCHAR(20) default '' NOT NULL,
