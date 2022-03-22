@@ -52,7 +52,7 @@
 - 고객, 농민 홈페이지 네브바, 고객, 농민, 관리자 로그아웃 기능
 - 파일 합본 및 경로 수정, 깃허브 업로드
 
-## 메모(+ 프로젝트 이후 변경사항)
+## 메모
 - local 컴퓨터에서 저장된 MyShop은 제대로 실행되었지만 깃허브에 저장한 MyShop을 import한 경우 에러발생
 - build와 context.xml이 달라서 생긴 문제 => local컴퓨터의 build폴더를 깃허브에 commit, context.xml의 cotext resource url을 수정해서 해결(03.22. 한현주)
 
